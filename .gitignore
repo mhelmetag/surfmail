@@ -137,3 +137,6 @@ dist
 
 # ts
 /functions/*.js
+
+# recordings
+/recordings/*.mpeg

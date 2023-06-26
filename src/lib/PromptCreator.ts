@@ -1,7 +1,6 @@
-// Takes in a set of surf forecast facts and returns a prompt for the ChatGPT API
-
 import { SurfForecastFacts } from "../types/SurfForecastFacts";
 
+// PromptCreator in a set of surf forecast facts and returns a prompt for the ChatGPT API
 export default class PromptCreator {
   constructor(surfForecastFacts: SurfForecastFacts) {
     this.surfForecastFacts = surfForecastFacts;
