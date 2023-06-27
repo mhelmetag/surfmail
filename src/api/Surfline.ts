@@ -1,12 +1,13 @@
 import axios from "axios";
-import querystring from "querystring";
-import { BatchResponse } from "../types/api/Surfline";
+import * as querystring from "node:querystring";
+
+import { BatchDetail } from "../types/api/Surfline";
 
 // Surfline is a wrapper for the Surfline API
 export default class Surfline {
   baseURL = "https://services.surfline.com";
 
-  getBatchDetails(spotIds: string[]): Promise<BatchResponse> {
+  getBatchDetails(spotIds: string[]): Promise<BatchDetail[]> {
     const params = {
       spotIds: spotIds.join(","),
       "units[swellHeight]": "FT",
@@ -22,6 +23,7 @@ export default class Surfline {
       .get(url.toString())
       .then((response) => {
         if (response.status !== 200) {
+          console.error(response);
           throw new Error(
             `Surfline responded with status code ${response.status}`
           );
@@ -32,6 +34,7 @@ export default class Surfline {
       })
       .catch((error) => {
         console.error(error);
+        console.error(error.response.data);
         throw error;
       });
   }

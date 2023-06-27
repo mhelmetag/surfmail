@@ -1,6 +1,6 @@
 import axios from "axios";
-import fs from "fs";
-import crypto from "crypto";
+import * as fs from "node:fs";
+import * as crypto from "node:crypto";
 
 // ElevenLabs is a wrapper for the ElevenLabs API
 export default class ElevenLabs {
@@ -8,7 +8,7 @@ export default class ElevenLabs {
   voiceID = "3aGfjsuKI2hjUqEpRPpp";
 
   postTTS(text: string): Promise<string> {
-    const url = new URL(`v1/text-to-speech/${this.voiceID}`, this.baseURL);
+    const url = new URL(`/v1/text-to-speech/${this.voiceID}`, this.baseURL);
     const payload = {
       text: text,
       model_id: "eleven_monolingual_v1",
@@ -19,9 +19,8 @@ export default class ElevenLabs {
     };
 
     return axios
-      .post(url.toString(), {
-        payload,
-        Headers: {
+      .post(url.toString(), payload, {
+        headers: {
           Accept: "audio/mpeg",
           "Content-Type": "application/json",
           "xi-api-key": process.env.ELEVEN_API_KEY,
@@ -29,6 +28,7 @@ export default class ElevenLabs {
       })
       .then((response) => {
         if (response.status !== 200) {
+          console.error(response);
           throw new Error(
             `ElevenLabs responded with status code ${response.status}`
           );
@@ -49,6 +49,7 @@ export default class ElevenLabs {
       })
       .catch((error) => {
         console.error(error);
+        console.error(error.response.data);
         throw error;
       });
   }

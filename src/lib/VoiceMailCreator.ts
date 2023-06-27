@@ -15,12 +15,18 @@ export default class VoiceMailCreator {
   }
 
   create() {
+    const now = new Date();
+
     return new Surfline()
       .getBatchDetails([this.surflineSpotId])
-      .then((response) => {
-        const detail = response.data.find((d) => d._id === this.surflineSpotId);
+      .then((details) => {
+        const detail = details.find((d) => d._id === this.surflineSpotId);
         const surfForecastFacts = <SurfForecastFacts>{
-          day: "Blah",
+          day: now.toLocaleString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+          }),
           surfSpot: detail.name,
           surfHeight: {
             min: detail.waveHeight.min,

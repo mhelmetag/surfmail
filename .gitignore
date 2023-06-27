@@ -137,6 +137,8 @@ dist
 
 # ts
 /functions/*.js
+/build/**/*.js
+/src/**/*.js
 
 # recordings
 /recordings/*.mpeg

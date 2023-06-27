@@ -9,18 +9,20 @@ export default class ChatGPT {
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: content }],
     };
-
     const url = new URL(`/v1/chat/completions`, this.baseURL);
 
+    console.log("OPEN_API_KEY=" + process.env.CHATGPT_API_KEY);
+
     return axios
-      .post(url.toString(), {
-        payload,
-        Headers: {
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      .post(url.toString(), payload, {
+        headers: {
+          Authorization: `Bearer ${process.env.CHATGPT_API_KEY}`,
+          "Content-Type": "application/json",
         },
       })
       .then((response) => {
         if (response.status !== 200) {
+          console.error(response);
           throw new Error(
             `ChatGPT responded with status code ${response.status}`
           );
@@ -31,6 +33,7 @@ export default class ChatGPT {
       })
       .catch((error) => {
         console.error(error);
+        console.error(error.response.data);
         throw error;
       });
   }
