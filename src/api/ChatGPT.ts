@@ -11,8 +11,6 @@ export default class ChatGPT {
     };
     const url = new URL(`/v1/chat/completions`, this.baseURL);
 
-    console.log("OPEN_API_KEY=" + process.env.CHATGPT_API_KEY);
-
     return axios
       .post(url.toString(), payload, {
         headers: {
@@ -28,12 +26,14 @@ export default class ChatGPT {
           );
         }
 
+        console.log(response);
+
         const data = response.data;
         return data.choices[0].message.content;
       })
       .catch((error) => {
         console.error(error);
-        console.error(error.response.data);
+        console.error(error.response?.data);
         throw error;
       });
   }

@@ -29,12 +29,14 @@ export default class Surfline {
           );
         }
 
+        console.log(response);
+
         const data = response.data;
         return data.data;
       })
       .catch((error) => {
         console.error(error);
-        console.error(error.response.data);
+        console.error(error.response?.data);
         throw error;
       });
   }

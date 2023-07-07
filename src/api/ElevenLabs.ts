@@ -1,13 +1,11 @@
 import axios from "axios";
-import * as fs from "node:fs";
-import * as crypto from "node:crypto";
 
 // ElevenLabs is a wrapper for the ElevenLabs API
 export default class ElevenLabs {
   baseURL = "https://api.elevenlabs.io";
   voiceID = "3aGfjsuKI2hjUqEpRPpp";
 
-  postTTS(text: string): Promise<string> {
+  postTTS(text: string): Promise<any> {
     const url = new URL(`/v1/text-to-speech/${this.voiceID}`, this.baseURL);
     const payload = {
       text: text,
@@ -20,10 +18,11 @@ export default class ElevenLabs {
 
     return axios
       .post(url.toString(), payload, {
+        responseType: "arraybuffer",
         headers: {
           Accept: "audio/mpeg",
           "Content-Type": "application/json",
-          "xi-api-key": process.env.ELEVEN_API_KEY,
+          "xi-api-key": process.env.ELEVENLABS_API_KEY,
         },
       })
       .then((response) => {
@@ -36,20 +35,9 @@ export default class ElevenLabs {
 
         return response.data;
       })
-      .then((data) => {
-        const uuid = crypto.randomUUID();
-        const filepath = `./recordings/${uuid}.mpeg`;
-        const file = fs.createWriteStream(filepath);
-
-        data.pipe(file);
-
-        file.close();
-
-        return filepath;
-      })
       .catch((error) => {
         console.error(error);
-        console.error(error.response.data);
+        console.error(error.response?.data);
         throw error;
       });
   }
