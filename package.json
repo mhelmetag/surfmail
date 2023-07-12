@@ -5,9 +5,10 @@
   "scripts": {
     "test": "jest src",
     "ts-node": "ts-node",
-    "prestart": "tsc && cp build/functions functions",
+    "clean": "rm -rf build/* && rm -rf functions/*",
+    "prestart": "npm run clean && tsc && cp build/functions/*.js functions/",
     "start": "twilio-run start",
-    "predeploy": "tsc && cp build/functions functions",
+    "predeploy": "npm run clean && tsc && cp build/functions/*.js functions/",
     "deploy": "twilio-run deploy"
   },
   "dependencies": {

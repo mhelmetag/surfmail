@@ -137,7 +137,8 @@ dist
 
 # ts
 /functions/*.js
-/build/**/*.js
+/build/**/*
+!/build/.keep
 /src/**/*.js
 
 # recordings
