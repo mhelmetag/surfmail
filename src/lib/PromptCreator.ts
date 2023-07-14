@@ -33,7 +33,7 @@ export default class PromptCreator {
     Air Temp: ${this.surfForecastFacts.airTemp}F
     Water Temp: ${this.surfForecastFacts.waterTemp}F
     
-    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report.
+    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by an Australian.
     
     Fully write out any abbreviations, directions or units.
     

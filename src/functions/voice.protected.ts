@@ -1,12 +1,13 @@
 import * as Twilio from "twilio";
 
-exports.handler = function (_context, _event, callback) {
-  const assetsBaseURL = "https://turquoise-emu-1178.twil.io/assets";
-  const now = new Date();
-  const assetURL = `${assetsBaseURL}/surfmail-${now.getFullYear()}-${now.getDate()}-${now.getDay()}.mpeg`;
+export const handler = (_context, _event, callback) => {
+  const assetURL =
+    "https://turquoise-emu-1178.twil.io/assets/surfmail-2023-7-5.mp3";
 
-  const twiml = new Twilio.twiml.VoiceResponse();
-  twiml.play(assetURL);
+  const voiceResponse = new Twilio.twiml.VoiceResponse();
 
-  callback(null, twiml);
+  console.log("Playing surf report");
+  voiceResponse.play(assetURL);
+
+  callback(null, voiceResponse);
 };
