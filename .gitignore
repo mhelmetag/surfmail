@@ -140,6 +140,7 @@ dist
 /build/**/*
 !/build/.keep
 /src/**/*.js
+!/src/server.js
 
 # recordings
 /recordings/*.mpeg
