@@ -10,7 +10,7 @@ const app = express();
 const host = process.env.HOST || "http://localhost";
 const port = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.send("All I need are some tasty waves...");
 });
 
