@@ -1,4 +1,4 @@
-export const voicemailFilepath = () => {
+export const voicemailFilename = () => {
   const now = new Date();
-  return `./recordings/surfmail-${now.getFullYear()}-${now.getDate()}-${now.getDay()}.mpeg`;
+  return `surfmail-${now.getFullYear()}-${now.getDate()}-${now.getDay()}.mpeg`;
 };

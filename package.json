@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "test": "jest src",
-    "ts-node": "ts-node",
-    "predeploy": "npm run build"
+    "ts": "ts-node",
+    "start": "node build/server.js",
+    "build": "rm -rf build/**/*.js && tsc",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "axios": "^1.4.0",

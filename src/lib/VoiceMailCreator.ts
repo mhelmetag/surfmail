@@ -7,6 +7,7 @@ import PromptCreator from "./PromptCreator";
 import ChatGPT from "../api/ChatGPT";
 import ElevenLabs from "../api/ElevenLabs";
 import { BatchDetail } from "../types/api/Surfline";
+import { voicemailFilename } from "./fileHelpers";
 
 // VoicemailCreator is a class that takes in a Surfline Spot ID,
 // fetches the swell info from Surfline's API,
@@ -32,7 +33,8 @@ export default class VoiceMailCreator {
         return new ChatGPT().postChatResponse(prompt).then((response) => {
           const editedResponse = response.replace("\\n", "");
           return new ElevenLabs().postTTS(editedResponse).then((data) => {
-            const filepath = `./recordings/surfmail-${now.getFullYear()}-${now.getDate()}-${now.getDay()}.mpeg`;
+            const filename = voicemailFilename();
+            const filepath = `./recordings/${filename}`;
 
             fs.writeFileSync(filepath, data);
 
