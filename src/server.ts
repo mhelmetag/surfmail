@@ -1,3 +1,5 @@
+import * as path from "path";
+
 import express from "express";
 import * as dotenv from "dotenv";
 import * as Twilio from "twilio";
@@ -25,7 +27,10 @@ app.get("/voice", (_, res) => {
   res.send(voiceResponse.toString());
 });
 
-app.use("/recordings", express.static("./recordings"));
+app.use(
+  "/recordings",
+  express.static(path.join(__dirname, "..", "recordings"))
+);
 
 app.listen(port, () => {
   console.log(`Surfmail listening on port ${port}`);
