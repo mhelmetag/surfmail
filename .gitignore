@@ -11,4 +11,4 @@ node_modules
 !/src/server.js
 
 # recordings
-/recordings/*.mpeg
+/recordings/*.mp3
