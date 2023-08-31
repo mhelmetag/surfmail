@@ -51,7 +51,6 @@ export default class VoiceMailCreator {
                 Bucket: process.env.AWS_S3_BUCKET_NAME,
                 Key: `${process.env.NODE_ENV}/${filename}`,
                 Body: data,
-                ACL: "public-read",
               });
               return client.send(command).then(() => {
                 return filepath;
