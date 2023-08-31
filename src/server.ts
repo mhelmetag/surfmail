@@ -16,8 +16,17 @@ app.get("/", (_, res) => {
 app.get("/voice", (_, res) => {
   const filename = voicemailFilename();
 
-  // From S3
   const assetURL = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${process.env.NODE_ENV}/${filename}`;
+  const voiceResponse = new Twilio.twiml.VoiceResponse();
+
+  voiceResponse.play(assetURL);
+
+  res.type("text/xml");
+  res.send(voiceResponse.toString());
+});
+
+app.get("/error", (_, res) => {
+  const assetURL = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/error.mpeg`;
   const voiceResponse = new Twilio.twiml.VoiceResponse();
 
   voiceResponse.play(assetURL);
