@@ -1,5 +1,7 @@
 import * as fs from "node:fs";
 
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+
 import Surfline from "../api/Surfline";
 import { SurfForecastFacts } from "../types/SurfForecastFacts";
 import { humanizeCompassDirection } from "./surflineHelpers";
@@ -32,14 +34,28 @@ export default class VoiceMailCreator {
         const prompt = new PromptCreator(surfForecastFacts).create();
         return new ChatGPT().postChatResponse(prompt).then((response) => {
           const editedResponse = response.replace("\\n", "");
-          return new ElevenLabs().postTTS(editedResponse).then((data) => {
-            const filename = voicemailFilename();
-            const filepath = `./recordings/${filename}`;
+          return new ElevenLabs()
+            .postTTS(editedResponse)
+            .then((data: string) => {
+              const filename = voicemailFilename();
+              const filepath = `./recordings/${filename}`;
 
-            fs.writeFileSync(filepath, data);
+              fs.writeFileSync(filepath, data);
 
-            return filepath;
-          });
+              console.log("Uploading to S3...");
+
+              const client = new S3Client({
+                region: process.env.AWS_DEFAULT_REGION,
+              });
+              const command = new PutObjectCommand({
+                Bucket: process.env.AWS_S3_BUCKET_NAME,
+                Key: `${process.env.NODE_ENV}/${filename}`,
+                Body: data,
+              });
+              return client.send(command).then(() => {
+                return filepath;
+              });
+            });
         });
       });
   }

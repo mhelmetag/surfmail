@@ -5,7 +5,7 @@ export default class ElevenLabs {
   baseURL = "https://api.elevenlabs.io";
   voiceID = "3aGfjsuKI2hjUqEpRPpp";
 
-  postTTS(text: string): Promise<any> {
+  postTTS(text: string): Promise<string> {
     const url = new URL(`/v1/text-to-speech/${this.voiceID}`, this.baseURL);
     const payload = {
       text: text,
@@ -15,6 +15,8 @@ export default class ElevenLabs {
         similarity_boost: 0.5,
       },
     };
+
+    console.log("Sending text to ElevenLabs...");
 
     return axios
       .post(url.toString(), payload, {

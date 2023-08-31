@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as querystring from "node:querystring";
+import querystring from "node:querystring";
 
 import { BatchDetail } from "../types/api/Surfline";
 
@@ -18,6 +18,8 @@ export default class Surfline {
     };
     const queryString = querystring.stringify(params);
     const url = new URL(`/kbyg/spots/batch?${queryString}`, this.baseURL);
+
+    console.log("Getting Surfline batch details...");
 
     return axios
       .get(url.toString(), {

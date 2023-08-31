@@ -1,5 +1,3 @@
-import * as path from "path";
-
 import express from "express";
 import * as dotenv from "dotenv";
 import * as Twilio from "twilio";
@@ -18,6 +16,8 @@ app.get("/", (_, res) => {
 
 app.get("/voice", (_, res) => {
   const filename = voicemailFilename();
+
+  // From S3
   const assetURL = `${host}/recordings/${filename}`;
   const voiceResponse = new Twilio.twiml.VoiceResponse();
 
@@ -26,11 +26,6 @@ app.get("/voice", (_, res) => {
   res.type("text/xml");
   res.send(voiceResponse.toString());
 });
-
-app.use(
-  "/recordings",
-  express.static(path.join(__dirname, "..", "recordings"))
-);
 
 app.listen(port, () => {
   console.log(`Surfmail listening on port ${port}`);

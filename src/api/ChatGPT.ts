@@ -11,6 +11,8 @@ export default class ChatGPT {
     };
     const url = new URL(`/v1/chat/completions`, this.baseURL);
 
+    console.log("Getting long-form forecast from ChatGPT...");
+
     return axios
       .post(url.toString(), payload, {
         headers: {

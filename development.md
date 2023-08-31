@@ -29,8 +29,10 @@ Keep it short.
 Introduce yourself as Steve Wavestorm.
 ```
 
+## S3
+
+- Upload to S3
+
 ## Auto Refresh
 
-Rough steps:
-
-- Cron to refresh surf report for AM and PM
+- Cron to refresh daily AM report for Ventura Point
