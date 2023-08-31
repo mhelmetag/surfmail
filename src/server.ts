@@ -7,7 +7,6 @@ import { voicemailFilename } from "./lib/fileHelpers";
 dotenv.config();
 
 const app = express();
-const host = process.env.HOST || "http://localhost";
 const port = process.env.PORT || 3000;
 
 app.get("/", (_, res) => {
@@ -18,7 +17,7 @@ app.get("/voice", (_, res) => {
   const filename = voicemailFilename();
 
   // From S3
-  const assetURL = `${host}/recordings/${filename}`;
+  const assetURL = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${process.env.NODE_ENV}/${filename}`;
   const voiceResponse = new Twilio.twiml.VoiceResponse();
 
   voiceResponse.play(assetURL);
