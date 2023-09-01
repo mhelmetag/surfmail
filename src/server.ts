@@ -14,22 +14,24 @@ app.get("/", (_, res) => {
 });
 
 app.get("/voice", (_, res) => {
-  const filename = voicemailFilename();
-
-  const assetURL = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${process.env.NODE_ENV}/${filename}`;
   const voiceResponse = new Twilio.twiml.VoiceResponse();
 
-  voiceResponse.play(assetURL);
+  const welcomeURL = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/welcome.mp3`;
+  voiceResponse.play(welcomeURL);
+
+  const filename = voicemailFilename();
+  const voicemailURL = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${process.env.NODE_ENV}/${filename}`;
+  voiceResponse.play(voicemailURL);
 
   res.type("text/xml");
   res.send(voiceResponse.toString());
 });
 
 app.get("/error", (_, res) => {
-  const assetURL = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/error.mpeg`;
+  const errorURL = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/error.mp3`;
   const voiceResponse = new Twilio.twiml.VoiceResponse();
 
-  voiceResponse.play(assetURL);
+  voiceResponse.play(errorURL);
 
   res.type("text/xml");
   res.send(voiceResponse.toString());

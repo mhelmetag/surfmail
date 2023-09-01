@@ -12,5 +12,5 @@ export const voicemailFilename = () => {
     day: "numeric",
     timeZone: "America/Los_Angeles",
   }).format(now);
-  return `surfmail-${year}-${month}-${day}.mpeg`;
+  return `surfmail-${year}-${month}-${day}.mp3`;
 };
