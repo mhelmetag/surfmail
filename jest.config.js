@@ -1,7 +1,4 @@
-const config = {
-  verbose: true,
-  transform: {
-    "^.+\\.ts?$": "ts-jest",
-  },
+module.exports = {
+  preset: "ts-jest",
+  testEnvironment: "node",
 };
-export default config;

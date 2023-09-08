@@ -12,7 +12,7 @@ describe("PromptCreator", () => {
     dominantSwell: {
       height: 3,
       period: 5,
-      direction: "NW",
+      direction: "northwest",
     },
     wind: {
       speed: 10,
@@ -28,16 +28,16 @@ describe("PromptCreator", () => {
     const expected = promptCreator.create();
     const actual = `Day: Monday, July 12th
     Surf Spot: Ocean Beach, CA
-    Surf Height: 1-2ft
-    Dominant Swell: 3ft 5s NW
-    Wind: 10mph onshore
-    Tide: 1.5ft
-    Air Temp: 70F
-    Water Temp: 60F
+    Surf Height: 1-2 feet
+    Dominant Swell: 3 feet at 5 seconds from the northwest
+    Wind: 10 miles per hour onshore
+    Tide: 1.5 feet
+    Air Temp: 70 Fahrenheit
+    Water Temp: 60 Fahrenheit
     
-    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report.
+    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by an Australian.
     
-    Fully write out any abbreviations, directions or units.
+    Don't use any shorthand for abbreviations, directions or units.
     
     Keep it short (up to 2 paragraphs).
     
@@ -48,20 +48,21 @@ describe("PromptCreator", () => {
 
   it("creates a prompt with a plus", () => {
     forecastFacts.surfHeight.plus = true;
+
     const promptCreator = new PromptCreator(forecastFacts);
     const expected = promptCreator.create();
     const actual = `Day: Monday, July 12th
     Surf Spot: Ocean Beach, CA
-    Surf Height: 1-2+ft
-    Dominant Swell: 3ft 5s NW
-    Wind: 10mph onshore
-    Tide: 1.5ft
-    Air Temp: 70F
-    Water Temp: 60F
+    Surf Height: 1-2+ feet
+    Dominant Swell: 3 feet at 5 seconds from the northwest
+    Wind: 10 miles per hour onshore
+    Tide: 1.5 feet
+    Air Temp: 70 Fahrenheit
+    Water Temp: 60 Fahrenheit
     
-    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report.
+    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by an Australian.
     
-    Fully write out any abbreviations, directions or units.
+    Don't use any shorthand for abbreviations, directions or units.
     
     Keep it short (up to 2 paragraphs).
     

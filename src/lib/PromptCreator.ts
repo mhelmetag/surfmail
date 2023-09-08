@@ -23,19 +23,19 @@ export default class PromptCreator {
     return `Day: ${this.surfForecastFacts.day}
     Surf Spot: ${this.surfForecastFacts.surfSpot}
     Surf Height: ${this.surfHeight()}
-    Dominant Swell: ${this.surfForecastFacts.dominantSwell.height}ft ${
+    Dominant Swell: ${this.surfForecastFacts.dominantSwell.height} feet at ${
       this.surfForecastFacts.dominantSwell.period
-    }s ${this.surfForecastFacts.dominantSwell.direction}
-    Wind: ${this.surfForecastFacts.wind.speed}mph ${
+    } seconds from the ${this.surfForecastFacts.dominantSwell.direction}
+    Wind: ${this.surfForecastFacts.wind.speed} miles per hour ${
       this.surfForecastFacts.wind.direction
     }
-    Tide: ${this.surfForecastFacts.tide}ft
-    Air Temp: ${this.surfForecastFacts.airTemp}F
-    Water Temp: ${this.surfForecastFacts.waterTemp}F
+    Tide: ${this.surfForecastFacts.tide} feet
+    Air Temp: ${this.surfForecastFacts.airTemp} Fahrenheit
+    Water Temp: ${this.surfForecastFacts.waterTemp} Fahrenheit
     
     Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by an Australian.
     
-    Fully write out any abbreviations, directions or units.
+    Don't use any shorthand for abbreviations, directions or units.
     
     Keep it short (up to 2 paragraphs).
     
@@ -45,7 +45,7 @@ export default class PromptCreator {
   private surfHeight() {
     let surfHeight = `${this.surfForecastFacts.surfHeight.min}-${this.surfForecastFacts.surfHeight.max}`;
     this.surfForecastFacts.surfHeight.plus ? (surfHeight += "+") : surfHeight;
-    surfHeight += "ft";
+    surfHeight += " feet";
     return surfHeight;
   }
 }
