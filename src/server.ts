@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get("/", (_, res) => {
-  res.send("All I need are some tasty waves...");
+  res.sendFile("index.html", { root: __dirname });
 });
 
 app.get("/voice", (_, res) => {

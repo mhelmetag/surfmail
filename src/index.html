@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SurfMail</title>
+    <link href="https://fonts.cdnfonts.com/css/market-deco" rel="stylesheet" />
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    body {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      font-size: 2rem;
+      height: 100vh;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    body:before {
+      background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.8)
+        ),
+        url(https://surfmail-recordings.s3.amazonaws.com/background.jpg)
+          no-repeat bottom;
+      background-size: cover;
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .title,
+    .subtitle,
+    .button {
+      color: #fff;
+    }
+
+    .title {
+      font-family: "Market Deco", sans-serif;
+      font-size: 6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      margin-bottom: 1rem;
+    }
+
+    .button {
+      text-decoration: none;
+      border: 1px solid #fff;
+      border-radius: 0.25rem;
+      padding: 0.5rem 1rem;
+    }
+  </style>
+  <body>
+    <h1 class="title">SurfMail</h1>
+    <h3 class="subtitle">
+      A retro voicemail surf report for Ventura Point, CA
+    </h3>
+    <p>
+      <a href="tel:+18053666270" class="button">8053666270</a>
+    </p>
+  </body>
+</html>
