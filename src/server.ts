@@ -1,3 +1,5 @@
+import path from "node:path";
+
 import express from "express";
 import * as dotenv from "dotenv";
 import * as Twilio from "twilio";
@@ -10,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get("/", (_, res) => {
-  res.sendFile("index.html", { root: __dirname });
+  res.sendFile("index.html", { root: path.join(__dirname, "../public") });
 });
 
 app.get("/voice", (_, res) => {
