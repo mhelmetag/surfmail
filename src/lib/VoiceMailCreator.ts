@@ -33,28 +33,39 @@ export default class VoiceMailCreator {
         );
         const prompt = new PromptCreator(surfForecastFacts).create();
         return new ChatGPT().postChatResponse(prompt).then((response) => {
+          const client = new S3Client({
+            region: process.env.AWS_DEFAULT_REGION,
+          });
+
+          // Upload prompt and response to S3 for historical purposes
+          const promptFilename = voicemailFilename("txt");
+
+          console.log("Uploading prompt and response to S3...");
+
+          const promptSaveCommand = new PutObjectCommand({
+            Bucket: process.env.AWS_S3_BUCKET_NAME,
+            Key: `${process.env.NODE_ENV}/${promptFilename}`,
+            Body: `PROMPT:\n${prompt}\n\nRESPONSE:\n${response}`,
+            ContentType: "text/plain",
+          });
+          client.send(promptSaveCommand);
+
           const editedResponse = response.replace("\\n", "");
           return new ElevenLabs()
             .postTTS(editedResponse)
             .then((data: string) => {
-              const filename = voicemailFilename();
-              const filepath = `./recordings/${filename}`;
+              const recordingFilename = voicemailFilename();
 
-              fs.writeFileSync(filepath, data);
+              console.log("Uploading recording to S3...");
 
-              console.log("Uploading to S3...");
-
-              const client = new S3Client({
-                region: process.env.AWS_DEFAULT_REGION,
-              });
-              const command = new PutObjectCommand({
+              const recordingSaveCommand = new PutObjectCommand({
                 Bucket: process.env.AWS_S3_BUCKET_NAME,
-                Key: `${process.env.NODE_ENV}/${filename}`,
+                Key: `${process.env.NODE_ENV}/${recordingFilename}`,
                 Body: data,
                 ContentType: "audio/mp3",
               });
-              return client.send(command).then(() => {
-                return filepath;
+              return client.send(recordingSaveCommand).then(() => {
+                return recordingFilename;
               });
             });
         });

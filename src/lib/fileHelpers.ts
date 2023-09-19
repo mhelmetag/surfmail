@@ -1,4 +1,4 @@
-export const voicemailFilename = () => {
+export const voicemailFilename = (extension = "mp3") => {
   const now = new Date();
   const year = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -12,5 +12,5 @@ export const voicemailFilename = () => {
     day: "numeric",
     timeZone: "America/Los_Angeles",
   }).format(now);
-  return `surfmail-${year}-${month}-${day}.mp3`;
+  return `surfmail-${year}-${month}-${day}.${extension}`;
 };

@@ -34,10 +34,12 @@ export default class PromptCreator {
     Water Temp: ${this.surfForecastFacts.waterTemp} Fahrenheit
     
     Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by an Australian.
+
+    If the surf is smaller than 2 feet or the wind is strong, the surf isn't that good and the report should reflect that.
     
-    Don't use any shorthand for abbreviations, directions or units.
-    
-    Keep it short (up to 2 paragraphs).
+    Keep the report short (up to 2 paragraphs).
+
+    Use some Australian slang for fun.
     
     Introduce yourself as Steve Wavestorm.`;
   }
