@@ -35,13 +35,13 @@ describe("PromptCreator", () => {
     Air Temp: 70 Fahrenheit
     Water Temp: 60 Fahrenheit
     
-    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by an Australian.
+    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by Australian surfing legend, Steve Wavestorm.
+
+    If the surf is smaller than 2 feet or the wind is strong and not offshore, the surf likely isn't that good and the report should reflect that.
     
-    Don't use any shorthand for abbreviations, directions or units.
+    Fully spell out shorthand for abbreviations, directions or units.
     
-    Keep it short (up to 2 paragraphs).
-    
-    Introduce yourself as Steve Wavestorm.`;
+    Keep the report short (up to 2 paragraphs).`;
 
     expect(expected).toEqual(actual);
   });
@@ -60,13 +60,13 @@ describe("PromptCreator", () => {
     Air Temp: 70 Fahrenheit
     Water Temp: 60 Fahrenheit
     
-    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by an Australian.
+    Given these surf conditions, write a surf report in the style of an old surf shop voicemail surf report that will be spoken by Australian surfing legend, Steve Wavestorm.
+
+    If the surf is smaller than 2 feet or the wind is strong and not offshore, the surf likely isn't that good and the report should reflect that.
     
-    Don't use any shorthand for abbreviations, directions or units.
+    Fully spell out shorthand for abbreviations, directions or units.
     
-    Keep it short (up to 2 paragraphs).
-    
-    Introduce yourself as Steve Wavestorm.`;
+    Keep the report short (up to 2 paragraphs).`;
 
     expect(expected).toEqual(actual);
   });

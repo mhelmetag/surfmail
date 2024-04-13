@@ -3,6 +3,7 @@ import path from "node:path";
 import express from "express";
 import * as dotenv from "dotenv";
 import * as Twilio from "twilio";
+import Rollbar from "rollbar";
 
 import { voicemailFilename } from "./lib/fileHelpers";
 
@@ -10,6 +11,10 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+const rollbar = new Rollbar({ accessToken: process.env.ROLLBAR_ACCESS_TOKEN });
+
+app.use(rollbar.errorHandler());
 
 app.get("/", (_, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "../public") });
